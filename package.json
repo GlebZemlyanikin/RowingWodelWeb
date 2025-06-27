@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://GlebZemlyanikin.github.io/RowingModel",
+  "homepage": "https://GlebZemlyanikin.github.io/RowingWodelWeb",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
