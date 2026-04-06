@@ -54,7 +54,12 @@ export function SegmentList({
                         placeholder="Время (например, 7:45.55)"
                         value={seg.time}
                         onChange={(e) =>
-                            onSegmentChange(athleteId, seg.id, 'time', e.target.value)
+                            onSegmentChange(
+                                athleteId,
+                                seg.id,
+                                'time',
+                                e.target.value.replace(/,/g, '.')
+                            )
                         }
                         style={styles.input}
                         onFocus={(e) => {

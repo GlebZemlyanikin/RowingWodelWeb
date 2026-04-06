@@ -2,17 +2,22 @@
 
 export function parseTimeToSeconds(timeStr) {
     try {
+        const s = String(timeStr ?? '')
+            .trim()
+            .replace(/\s+/g, '')
+            .replace(/,/g, '.');
+
         // Handle format MM:SS.ss
-        if (timeStr.includes(":")) {
-            const [minutes, seconds] = timeStr.split(":").map(Number)
+        if (s.includes(":")) {
+            const [minutes, seconds] = s.split(":").map(Number)
             if (isNaN(minutes) || isNaN(seconds)) {
                 return 0
             }
             return minutes * 60 + seconds
         }
         // Handle format MM.SS.ss (minutes.seconds.hundredths)
-        if (timeStr.split(".").length === 3) {
-            const parts = timeStr.split(".")
+        if (s.split(".").length === 3) {
+            const parts = s.split(".")
             const minutes = parseInt(parts[0])
             const seconds = parseFloat(parts[1] + "." + parts[2])
             if (isNaN(minutes) || isNaN(seconds)) {
@@ -21,7 +26,7 @@ export function parseTimeToSeconds(timeStr) {
             return minutes * 60 + seconds
         }
         // Handle format SS.ss - normalize decimal places
-        const seconds = parseFloat(timeStr)
+        const seconds = parseFloat(s)
         if (isNaN(seconds)) {
             return 0
         }
