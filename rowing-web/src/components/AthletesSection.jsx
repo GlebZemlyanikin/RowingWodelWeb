@@ -17,9 +17,10 @@ export function AthletesSection({
 }) {
     return (
         <>
-            <h3 style={{ color: theme === 'dark' ? '#fff' : '#2a3b5d' }}>
-                Данные спортсменов
-            </h3>
+            <div style={styles.sectionTitleRow}>
+                <h3 style={styles.sectionTitle}>🧑‍🚣 Спортсмены</h3>
+                <p style={styles.sectionHint}>Заполните отрезки и нажмите «Рассчитать»</p>
+            </div>
             {athletes.map((ath) => (
                 <AthleteCard
                     key={ath.id}
@@ -40,14 +41,14 @@ export function AthletesSection({
             ))}
 
             <button onClick={onAddAthlete} style={styles.button}>
-                Добавить спортсмена
+                ➕ Добавить спортсмена
             </button>
             <br />
             <button
                 style={{ ...styles.button, marginTop: 10, width: 180 }}
                 onClick={onCalculate}
             >
-                Рассчитать
+                🧮 Рассчитать
             </button>
         </>
     );

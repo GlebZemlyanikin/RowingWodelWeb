@@ -77,6 +77,28 @@ export function getStyles(theme) {
         mutedText: {
             color: colors.textMuted,
         },
+        sectionTitleRow: {
+            display: 'flex',
+            alignItems: 'baseline',
+            justifyContent: 'space-between',
+            gap: 12,
+            margin: '18px 0 10px 0',
+        },
+        sectionTitle: {
+            margin: 0,
+            fontSize: 18,
+            fontWeight: 700,
+            letterSpacing: '-0.01em',
+            color: theme === 'dark' ? '#fff' : '#2a3b5d',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 8,
+        },
+        sectionHint: {
+            margin: 0,
+            fontSize: 13,
+            color: colors.textMuted,
+        },
         section: {
             marginBottom: 24,
         },

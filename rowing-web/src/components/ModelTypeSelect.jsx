@@ -1,17 +1,13 @@
 import React from 'react';
 
-export function ModelTypeSelect({ modelType, modelTypes, onChange, styles, theme }) {
+export function ModelTypeSelect({ modelType, modelTypes, onChange, styles }) {
     return (
-        <div style={{ ...styles.flexRow, ...styles.section }}>
-            <div>
-                <label
-                    style={{
-                        color: theme === 'dark' ? '#fff' : '#2a3b5d',
-                        fontWeight: 500,
-                    }}
-                >
-                    Тип модели:{' '}
-                </label>
+        <div style={{ ...styles.section }}>
+            <div style={styles.sectionTitleRow}>
+                <h3 style={styles.sectionTitle}>🧠 Тип модели</h3>
+                <p style={styles.sectionHint}>Выберите таблицу для расчёта</p>
+            </div>
+            <div style={styles.flexRow}>
                 <select
                     value={modelType}
                     onChange={(e) => onChange(e.target.value)}
