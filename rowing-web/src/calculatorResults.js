@@ -4,7 +4,7 @@ import {
     parseTimeToSeconds,
     formatTime,
     avg,
-} from '../utils';
+} from './utils';
 
 /**
  * @param {Array<{ name: string, category: string, boat: string, segments: Array<{ distance: number, time: string }> }>} athletes

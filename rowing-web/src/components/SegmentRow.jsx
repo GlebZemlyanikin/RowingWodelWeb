@@ -1,4 +1,4 @@
-import { getDistance } from '../../distanceTable';
+import { getDistance } from '../distanceTable';
 
 export default function SegmentRow({
     athleteId,

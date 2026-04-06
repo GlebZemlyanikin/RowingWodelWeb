@@ -27,14 +27,14 @@ npm run build
 ```
 
 ## Структура проекта
-- `src/` — исходный код React-приложения
-  - `App.jsx` — основной компонент
-  - `Calculator.jsx` — калькулятор модельного времени
-  - `main.jsx` — точка входа
-  - `index.css` — стили
-- `modelTableRUSSIA.js`, `modelTableWORLD.js` — таблицы модельных времён
-- `distanceTable.js` — поддерживаемые дистанции
-- `utils.js` — функции для работы с временем и расчётами
+- `src/` — исходный код и данные приложения
+  - `App.jsx`, `main.jsx`, `index.css` — точка входа и стили
+  - `Calculator.jsx`, `Calculator.css`, `components/`, `hooks/` — калькулятор
+  - `calculatorResults.js`, `modelTables.js` — расчёты и выбор модели
+  - `utils.js` — время и проценты
+  - `distanceTable.js` — дистанции
+  - `modelTableRUSSIA.js`, `modelTableWORLD.js` — таблицы модельных времён
+- `public/` — статика (иконка и т.д.)
 
 ## Лицензия
 MIT

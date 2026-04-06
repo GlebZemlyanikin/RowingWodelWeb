@@ -1,5 +1,5 @@
-import { modelTimesWORLD } from '../modelTableWORLD';
-import { modelTimesRUSSIA } from '../modelTableRUSSIA';
+import { modelTimesWORLD } from './modelTableWORLD';
+import { modelTimesRUSSIA } from './modelTableRUSSIA';
 
 export const MODEL_TABLES = {
     'Мировая модель': modelTimesWORLD,

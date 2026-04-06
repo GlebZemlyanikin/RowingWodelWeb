@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { formatTime } from '../../utils';
+import { formatTime } from '../utils';
 
 export default function ResultsTable({
     results,

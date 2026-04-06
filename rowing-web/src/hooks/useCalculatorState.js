@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { distances, getDistance } from '../../distanceTable';
+import { distances, getDistance } from '../distanceTable';
 import {
     MODEL_TABLES,
     DEFAULT_MODEL_TYPE,
