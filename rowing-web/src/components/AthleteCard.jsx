@@ -26,6 +26,15 @@ export function AthleteCard({
                         onAthleteChange(athleteId, 'name', e.target.value)
                     }
                     style={styles.input}
+                    onFocus={(e) => {
+                        e.currentTarget.style.boxShadow = styles._tokens?.focusRing ?? '';
+                        e.currentTarget.style.borderColor =
+                            styles._tokens?.colors?.primary ?? '#4f8cff';
+                    }}
+                    onBlur={(e) => {
+                        e.currentTarget.style.boxShadow = '';
+                        e.currentTarget.style.borderColor = '';
+                    }}
                 />
                 <select
                     value={athlete.category}
@@ -33,6 +42,15 @@ export function AthleteCard({
                         onAthleteChange(athleteId, 'category', e.target.value)
                     }
                     style={styles.select}
+                    onFocus={(e) => {
+                        e.currentTarget.style.boxShadow = styles._tokens?.focusRing ?? '';
+                        e.currentTarget.style.borderColor =
+                            styles._tokens?.colors?.primary ?? '#4f8cff';
+                    }}
+                    onBlur={(e) => {
+                        e.currentTarget.style.boxShadow = '';
+                        e.currentTarget.style.borderColor = '';
+                    }}
                 >
                     {categories.map((cat) => (
                         <option key={cat} value={cat}>
@@ -46,6 +64,15 @@ export function AthleteCard({
                         onAthleteChange(athleteId, 'boat', e.target.value)
                     }
                     style={styles.select}
+                    onFocus={(e) => {
+                        e.currentTarget.style.boxShadow = styles._tokens?.focusRing ?? '';
+                        e.currentTarget.style.borderColor =
+                            styles._tokens?.colors?.primary ?? '#4f8cff';
+                    }}
+                    onBlur={(e) => {
+                        e.currentTarget.style.boxShadow = '';
+                        e.currentTarget.style.borderColor = '';
+                    }}
                 >
                     {boats.map((boat) => (
                         <option key={boat} value={boat}>
@@ -57,6 +84,12 @@ export function AthleteCard({
                     <button
                         onClick={() => onRemoveAthlete(athleteId)}
                         style={{ ...styles.button, ...styles.buttonDanger }}
+                        onMouseDown={(e) => {
+                            e.currentTarget.style.transform = 'translateY(0px) scale(0.98)';
+                        }}
+                        onMouseUp={(e) => {
+                            e.currentTarget.style.transform = 'translateY(0px) scale(1)';
+                        }}
                     >
                         ✕
                     </button>

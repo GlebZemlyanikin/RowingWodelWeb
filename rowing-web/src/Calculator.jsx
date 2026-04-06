@@ -42,14 +42,8 @@ export default function Calculator() {
                 style={styles.themeToggle}
             />
             <div style={styles.card}>
-                <h2
-                    style={{
-                        textAlign: 'center',
-                        marginBottom: 28,
-                        color: theme === 'dark' ? '#fff' : '#2a3b5d',
-                    }}
-                >
-                    Калькулятор модельного времени
+                <h2 style={{ ...styles.title, marginBottom: 22 }}>
+                    🧮 Калькулятор модельного времени
                 </h2>
                 <ModelTypeSelect
                     modelType={modelType}

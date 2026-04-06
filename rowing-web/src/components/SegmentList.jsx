@@ -33,6 +33,16 @@ export function SegmentList({
                             )
                         }
                         style={styles.select}
+                        onFocus={(e) => {
+                            e.currentTarget.style.boxShadow =
+                                styles._tokens?.focusRing ?? '';
+                            e.currentTarget.style.borderColor =
+                                styles._tokens?.colors?.primary ?? '#4f8cff';
+                        }}
+                        onBlur={(e) => {
+                            e.currentTarget.style.boxShadow = '';
+                            e.currentTarget.style.borderColor = '';
+                        }}
                     >
                         {distances.map((d) => (
                             <option key={d} value={Number.parseInt(d, 10)}>
@@ -47,19 +57,46 @@ export function SegmentList({
                             onSegmentChange(athleteId, seg.id, 'time', e.target.value)
                         }
                         style={styles.input}
+                        onFocus={(e) => {
+                            e.currentTarget.style.boxShadow =
+                                styles._tokens?.focusRing ?? '';
+                            e.currentTarget.style.borderColor =
+                                styles._tokens?.colors?.primary ?? '#4f8cff';
+                        }}
+                        onBlur={(e) => {
+                            e.currentTarget.style.boxShadow = '';
+                            e.currentTarget.style.borderColor = '';
+                        }}
                     />
                     {segments.length > 1 && (
                         <button
                             onClick={() => onRemoveSegment(athleteId, seg.id)}
                             style={{ ...styles.button, ...styles.buttonDanger }}
+                            onMouseDown={(e) => {
+                                e.currentTarget.style.transform =
+                                    'translateY(0px) scale(0.98)';
+                            }}
+                            onMouseUp={(e) => {
+                                e.currentTarget.style.transform =
+                                    'translateY(0px) scale(1)';
+                            }}
                         >
                             ✕
                         </button>
                     )}
                 </div>
             ))}
-            <button onClick={() => onAddSegment(athleteId)} style={styles.button}>
-                Добавить отрезок
+            <button
+                onClick={() => onAddSegment(athleteId)}
+                style={styles.button}
+                onMouseDown={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0px) scale(0.98)';
+                }}
+                onMouseUp={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0px) scale(1)';
+                }}
+            >
+                ➕ Добавить отрезок
             </button>
         </div>
     );
