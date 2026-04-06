@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import * as XLSX from 'xlsx-js-style';
+import { saveAs } from 'file-saver';
 import {
     avg,
     calculateModelPercentage,
@@ -265,19 +266,24 @@ export function useCalculatorState({ modelTables, distances }) {
                 type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
             });
 
-            const url = URL.createObjectURL(blob);
             const filename = 'results.xlsx';
 
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = filename;
-            a.rel = 'noopener';
-            a.style.display = 'none';
+            // `file-saver` обычно надёжнее для iOS/Android, чем ручной `<a download>`.
+            try {
+                saveAs(blob, filename);
+            } catch {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                a.rel = 'noopener';
+                a.style.display = 'none';
 
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
-            setTimeout(() => URL.revokeObjectURL(url), 0);
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                setTimeout(() => URL.revokeObjectURL(url), 0);
+            }
         } catch (e) {
             console.error('Excel export failed', e);
         }
