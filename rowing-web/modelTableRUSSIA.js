@@ -98,7 +98,7 @@ export const modelTimesRUSSIA = {
     },
 }
 
-export function getModelTime(ageCategory, distance, boatClass, actualTime) {
+export function getModelTime(ageCategory, distance, boatClass) {
     const categoryMap = {
         "Юноши до 19": "Юноши до 19",
         "Девушки до 19": "Девушки до 19",

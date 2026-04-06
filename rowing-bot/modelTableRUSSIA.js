@@ -1,4 +1,4 @@
-export const modelTimesRUSSIA = {
+const modelTimesRUSSIA = {
     Мужчина: {
         "1х": 397, // Одиночка надо менять
         "1х л/в": 412, // Одиночка легкий вес
@@ -96,9 +96,9 @@ export const modelTimesRUSSIA = {
         "4-": 442,
         "4х": 434,
     },
-}
+};
 
-export function getModelTime(ageCategory, distance, boatClass, actualTime) {
+function getModelTime(ageCategory, distance, boatClass, actualTime) {
     const categoryMap = {
         "Юноши до 19": "Юноши до 19",
         "Девушки до 19": "Девушки до 19",
@@ -110,23 +110,28 @@ export function getModelTime(ageCategory, distance, boatClass, actualTime) {
         "Девушки до 15": "Девушки до 15",
         Мужчина: "Мужчина",
         Женщины: "Женщины",
-    }
+    };
 
-    const modelCategory = categoryMap[ageCategory]
+    const modelCategory = categoryMap[ageCategory];
     if (
         !modelCategory ||
         !modelTimesRUSSIA[modelCategory] ||
         !modelTimesRUSSIA[modelCategory][boatClass]
     ) {
-        throw new Error("Invalid category or boat class")
+        throw new Error("Invalid category or boat class");
     }
 
-    const baseModelTime = modelTimesRUSSIA[modelCategory][boatClass]
+    const baseModelTime = modelTimesRUSSIA[modelCategory][boatClass];
     
     // Recalculate model time based on average speed
     const modelSpeed = 2000 / baseModelTime;
     const modelTime = distance / modelSpeed;
 
-    return modelTime
+    return modelTime;
 }
+
+module.exports = {
+    modelTimesRUSSIA,
+    getModelTime
+};
 

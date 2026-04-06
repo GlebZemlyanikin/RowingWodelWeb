@@ -26,7 +26,7 @@ export function parseTimeToSeconds(timeStr) {
             return 0
         }
         return Math.round(seconds * 100) / 100
-    } catch (error) {
+    } catch {
         return 0
     }
 }
@@ -36,7 +36,7 @@ export function formatTime(seconds) {
         const minutes = Math.floor(seconds / 60)
         const remainingSeconds = (seconds % 60).toFixed(2)
         return `${minutes}:${remainingSeconds.padStart(5, "0")}`
-    } catch (error) {
+    } catch {
         return "0:00.00"
     }
 }
@@ -45,7 +45,7 @@ export function avg(arr) {
     try {
         if (!arr || arr.length === 0) return 0
         return arr.reduce((a, b) => a + b, 0) / arr.length
-    } catch (error) {
+    } catch {
         return 0
     }
 }
