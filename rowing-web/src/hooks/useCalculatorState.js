@@ -251,7 +251,36 @@ export function useCalculatorState({ modelTables, distances }) {
         }
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, 'Результаты');
-        XLSX.writeFile(wb, 'results.xlsx');
+
+        // На некоторых мобильных браузерах `XLSX.writeFile()` может не инициировать загрузку.
+        // Поэтому формируем Blob и делаем скачивание через временную ссылку с `download`.
+        try {
+            const wbout = XLSX.write(wb, {
+                bookType: 'xlsx',
+                type: 'array',
+                cellStyles: true,
+            });
+
+            const blob = new Blob([wbout], {
+                type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            });
+
+            const url = URL.createObjectURL(blob);
+            const filename = 'results.xlsx';
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.rel = 'noopener';
+            a.style.display = 'none';
+
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 0);
+        } catch (e) {
+            console.error('Excel export failed', e);
+        }
     };
 
     return {
