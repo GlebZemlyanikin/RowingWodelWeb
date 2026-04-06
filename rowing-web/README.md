@@ -36,7 +36,6 @@ npm run build
 
 - **PR или push** → GitHub Actions запускает **CI**: `npm ci` → `npm run lint` → `npm run build`.
 - **Merge в `main`** → GitHub Actions собирает проект и **деплоит на GitHub Pages**.
-- В самом приложении (внизу страницы) отображаются **Version/commit/env**, чтобы быстро понимать, какая сборка сейчас открыта.
 
 ## Структура проекта
 - `src/` — исходный код React-приложения

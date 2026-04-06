@@ -6,7 +6,6 @@ import { ThemeToggle } from './components/ThemeToggle';
 import { ModelTypeSelect } from './components/ModelTypeSelect';
 import { AthletesSection } from './components/AthletesSection';
 import { ResultsSection } from './components/ResultsSection';
-import { BuildInfo } from './components/BuildInfo';
 import { useCalculatorState } from './hooks/useCalculatorState';
 import { getStyles } from './styles/getStyles';
 
@@ -82,7 +81,6 @@ export default function Calculator() {
                     styles={styles}
                     theme={theme}
                 />
-                <BuildInfo theme={theme} />
             </div>
         </div>
     );
