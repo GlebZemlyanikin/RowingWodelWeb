@@ -2,6 +2,12 @@
 
 Веб-приложение для расчёта модельного времени и анализа результатов спортсменов по академической гребле.
 
+## Статус и демо
+
+- **CI (сборка и линт)**: ![CI](https://github.com/GlebZemlyanikin/RowingWodelWeb/actions/workflows/ci.yml/badge.svg)
+- **Deploy (GitHub Pages)**: ![Deploy to GitHub Pages](https://github.com/GlebZemlyanikin/RowingWodelWeb/actions/workflows/deploy-pages.yml/badge.svg)
+- **Приложение (prod)**: `https://glebzemlyanikin.github.io/RowingWodelWeb/`
+
 ## Возможности
 - Расчёт модельного времени по российской и мировой модели
 - Поддержка разных возрастных категорий и классов лодок
@@ -26,15 +32,21 @@
 npm run build
 ```
 
+## Как устроен релиз (CI/CD)
+
+- **PR или push** → GitHub Actions запускает **CI**: `npm ci` → `npm run lint` → `npm run build`.
+- **Merge в `main`** → GitHub Actions собирает проект и **деплоит на GitHub Pages**.
+- В самом приложении (внизу страницы) отображаются **Version/commit/env**, чтобы быстро понимать, какая сборка сейчас открыта.
+
 ## Структура проекта
-- `src/` — исходный код и данные приложения
-  - `App.jsx`, `main.jsx`, `index.css` — точка входа и стили
-  - `Calculator.jsx`, `Calculator.css`, `components/`, `hooks/` — калькулятор
-  - `calculatorResults.js`, `modelTables.js` — расчёты и выбор модели
-  - `utils.js` — время и проценты
-  - `distanceTable.js` — дистанции
-  - `modelTableRUSSIA.js`, `modelTableWORLD.js` — таблицы модельных времён
-- `public/` — статика (иконка и т.д.)
+- `src/` — исходный код React-приложения
+  - `App.jsx` — основной компонент
+  - `Calculator.jsx` — калькулятор модельного времени
+  - `main.jsx` — точка входа
+  - `index.css` — стили
+- `modelTableRUSSIA.js`, `modelTableWORLD.js` — таблицы модельных времён
+- `distanceTable.js` — поддерживаемые дистанции
+- `utils.js` — функции для работы с временем и расчётами
 
 ## Лицензия
 MIT

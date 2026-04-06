@@ -1,83 +1,88 @@
-import './Calculator.css';
-import ThemeToggle from './components/ThemeToggle';
-import ModelTypeSelect from './components/ModelTypeSelect';
-import AthleteCard from './components/AthleteCard';
-import ResultsTable from './components/ResultsTable';
+import React, { useState } from 'react';
+import { modelTimesWORLD } from './modelTableWORLD';
+import { modelTimesRUSSIA } from './modelTableRUSSIA';
+import { distances } from './distanceTable';
+import { ThemeToggle } from './components/ThemeToggle';
+import { ModelTypeSelect } from './components/ModelTypeSelect';
+import { AthletesSection } from './components/AthletesSection';
+import { ResultsSection } from './components/ResultsSection';
+import { BuildInfo } from './components/BuildInfo';
 import { useCalculatorState } from './hooks/useCalculatorState';
+import { getStyles } from './styles/getStyles';
 
 export default function Calculator() {
+    const [theme, setTheme] = useState('light');
+    const styles = getStyles(theme);
+    const modelTables = {
+        'Мировая модель': modelTimesWORLD,
+        'Российская модель (Н.Н.)': modelTimesRUSSIA,
+    };
     const {
-        theme,
-        toggleTheme,
         modelType,
         setModelType,
-        modelTableKeys,
+        modelTypes,
         currentModel,
         athletes,
         results,
         maxSegments,
-        distances,
         handleAthleteChange,
         handleSegmentChange,
         addAthlete,
         removeAthlete,
         addSegment,
         removeSegment,
-        handleCalc,
-        handleExport,
-    } = useCalculatorState();
+        calculate,
+        exportToExcel,
+    } = useCalculatorState({ modelTables, distances });
 
     return (
-        <div className="calculator-root" data-theme={theme}>
-            <div className="calculator-page">
-                <ThemeToggle theme={theme} onToggle={toggleTheme} />
-                <div className="calculator-card">
-                    <h2 className="calculator-title">
-                        Калькулятор модельного времени
-                    </h2>
-                    <ModelTypeSelect
-                        id="model-type-select"
-                        value={modelType}
-                        options={modelTableKeys}
-                        onChange={setModelType}
-                    />
-                    <hr className="calculator-divider" />
-                    <h3 className="calculator-subtitle">Данные спортсменов</h3>
-                    {athletes.map((ath) => (
-                        <AthleteCard
-                            key={ath.id}
-                            athlete={ath}
-                            currentModel={currentModel}
-                            distances={distances}
-                            canRemoveAthlete={athletes.length > 1}
-                            onAthleteChange={handleAthleteChange}
-                            onSegmentChange={handleSegmentChange}
-                            onRemoveAthlete={removeAthlete}
-                            onAddSegment={addSegment}
-                            onRemoveSegment={removeSegment}
-                        />
-                    ))}
-                    <button
-                        type="button"
-                        className="calculator-btn"
-                        onClick={addAthlete}
-                    >
-                        Добавить спортсмена
-                    </button>
-                    <br />
-                    <button
-                        type="button"
-                        className="calculator-btn calculator-btn-calc"
-                        onClick={handleCalc}
-                    >
-                        Рассчитать
-                    </button>
-                    <ResultsTable
-                        results={results}
-                        maxSegments={maxSegments}
-                        onExport={handleExport}
-                    />
-                </div>
+        <div style={styles.page}>
+            <ThemeToggle
+                theme={theme}
+                onToggle={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+                style={styles.themeToggle}
+            />
+            <div style={styles.card}>
+                <h2
+                    style={{
+                        textAlign: 'center',
+                        marginBottom: 28,
+                        color: theme === 'dark' ? '#fff' : '#2a3b5d',
+                    }}
+                >
+                    Калькулятор модельного времени
+                </h2>
+                <ModelTypeSelect
+                    modelType={modelType}
+                    modelTypes={modelTypes}
+                    onChange={setModelType}
+                    styles={styles}
+                    theme={theme}
+                />
+                <hr style={{ margin: '20px 0' }} />
+                <AthletesSection
+                    athletes={athletes}
+                    currentModel={currentModel}
+                    distances={distances}
+                    onAthleteChange={handleAthleteChange}
+                    onRemoveAthlete={removeAthlete}
+                    onSegmentChange={handleSegmentChange}
+                    onAddSegment={addSegment}
+                    onRemoveSegment={removeSegment}
+                    onAddAthlete={addAthlete}
+                    onCalculate={calculate}
+                    styles={styles}
+                    theme={theme}
+                />
+
+                <ResultsSection
+                    results={results}
+                    maxSegments={maxSegments}
+                    onExport={exportToExcel}
+                    styles={styles}
+                    theme={theme}
+                />
+                <BuildInfo theme={theme} />
             </div>
         </div>
     );

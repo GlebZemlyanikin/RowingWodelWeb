@@ -1,11 +1,10 @@
-export default function ThemeToggle({ theme, onToggle }) {
+import React from 'react';
+
+export function ThemeToggle({ theme, onToggle, style }) {
     return (
-        <button
-            type="button"
-            className="calculator-theme-toggle"
-            onClick={onToggle}
-        >
+        <button style={style} onClick={onToggle}>
             {theme === 'light' ? '🌙 Тёмная тема' : '☀️ Светлая тема'}
         </button>
     );
 }
+

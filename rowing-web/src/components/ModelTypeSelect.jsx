@@ -1,17 +1,23 @@
-export default function ModelTypeSelect({ id, value, options, onChange }) {
+import React from 'react';
+
+export function ModelTypeSelect({ modelType, modelTypes, onChange, styles, theme }) {
     return (
-        <div className="calculator-model-row calculator-section">
+        <div style={{ ...styles.flexRow, ...styles.section }}>
             <div>
-                <label htmlFor={id} className="calculator-label">
+                <label
+                    style={{
+                        color: theme === 'dark' ? '#fff' : '#2a3b5d',
+                        fontWeight: 500,
+                    }}
+                >
                     Тип модели:{' '}
                 </label>
                 <select
-                    id={id}
-                    className="calculator-select"
-                    value={value}
+                    value={modelType}
                     onChange={(e) => onChange(e.target.value)}
+                    style={styles.select}
                 >
-                    {options.map((type) => (
+                    {modelTypes.map((type) => (
                         <option key={type} value={type}>
                             {type}
                         </option>
@@ -21,3 +27,4 @@ export default function ModelTypeSelect({ id, value, options, onChange }) {
         </div>
     );
 }
+

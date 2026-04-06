@@ -25,9 +25,6 @@ dist-ssr/
 .DS_Store
 Thumbs.db
 
-# Отдельный репозиторий (не пушить в RowingWodelWeb)
-rowing-bot/
-
 # VS/JetBrains project files
 *.suo
 *.ntvs*

@@ -1,103 +1,79 @@
-import SegmentRow from './SegmentRow';
+import React from 'react';
+import { SegmentList } from './SegmentList';
 
-export default function AthleteCard({
+export function AthleteCard({
     athlete,
-    currentModel,
-    distances: distanceOptions,
-    canRemoveAthlete,
+    athleteId,
+    canRemove,
+    categories,
+    boats,
+    distances,
     onAthleteChange,
-    onSegmentChange,
     onRemoveAthlete,
+    onSegmentChange,
     onAddSegment,
     onRemoveSegment,
+    styles,
+    theme,
 }) {
-    const nameId = `athlete-name-${athlete.id}`;
-    const categoryId = `athlete-category-${athlete.id}`;
-    const boatId = `athlete-boat-${athlete.id}`;
-
     return (
-        <div className="calculator-section calculator-athlete-block">
-            <div className="calculator-flex-row">
-                <label htmlFor={nameId} className="calculator-visually-hidden">
-                    Имя спортсмена
-                </label>
+        <div style={{ ...styles.section, ...styles.segmentBlock }}>
+            <div style={styles.flexRow}>
                 <input
-                    id={nameId}
-                    className="calculator-input"
                     placeholder="Имя"
                     value={athlete.name}
                     onChange={(e) =>
-                        onAthleteChange(athlete.id, 'name', e.target.value)
+                        onAthleteChange(athleteId, 'name', e.target.value)
                     }
+                    style={styles.input}
                 />
-                <label htmlFor={categoryId} className="calculator-visually-hidden">
-                    Категория
-                </label>
                 <select
-                    id={categoryId}
-                    className="calculator-select"
                     value={athlete.category}
                     onChange={(e) =>
-                        onAthleteChange(athlete.id, 'category', e.target.value)
+                        onAthleteChange(athleteId, 'category', e.target.value)
                     }
+                    style={styles.select}
                 >
-                    {Object.keys(currentModel).map((cat) => (
+                    {categories.map((cat) => (
                         <option key={cat} value={cat}>
                             {cat}
                         </option>
                     ))}
                 </select>
-                <label htmlFor={boatId} className="calculator-visually-hidden">
-                    Класс лодки
-                </label>
                 <select
-                    id={boatId}
-                    className="calculator-select"
                     value={athlete.boat}
                     onChange={(e) =>
-                        onAthleteChange(athlete.id, 'boat', e.target.value)
+                        onAthleteChange(athleteId, 'boat', e.target.value)
                     }
+                    style={styles.select}
                 >
-                    {Object.keys(currentModel[athlete.category]).map((boat) => (
+                    {boats.map((boat) => (
                         <option key={boat} value={boat}>
                             {boat}
                         </option>
                     ))}
                 </select>
-                {canRemoveAthlete && (
+                {canRemove && (
                     <button
-                        type="button"
-                        className="calculator-btn calculator-btn-danger"
-                        onClick={() => onRemoveAthlete(athlete.id)}
-                        aria-label="Удалить спортсмена"
+                        onClick={() => onRemoveAthlete(athleteId)}
+                        style={{ ...styles.button, ...styles.buttonDanger }}
                     >
                         ✕
                     </button>
                 )}
             </div>
-            <div className="calculator-segments-wrap">
-                <b className="calculator-segments-title">Отрезки:</b>
-                {athlete.segments.map((seg) => (
-                    <SegmentRow
-                        key={seg.id}
-                        athleteId={athlete.id}
-                        segment={seg}
-                        distances={distanceOptions}
-                        showRemove={athlete.segments.length > 1}
-                        onSegmentChange={onSegmentChange}
-                        onRemoveSegment={onRemoveSegment}
-                        timeInputId={`seg-time-${athlete.id}-${seg.id}`}
-                        distanceSelectId={`seg-dist-${athlete.id}-${seg.id}`}
-                    />
-                ))}
-                <button
-                    type="button"
-                    className="calculator-btn"
-                    onClick={() => onAddSegment(athlete.id)}
-                >
-                    Добавить отрезок
-                </button>
-            </div>
+
+            <SegmentList
+                athleteId={athleteId}
+                segments={athlete.segments}
+                distances={distances}
+                onSegmentChange={onSegmentChange}
+                onAddSegment={onAddSegment}
+                onRemoveSegment={onRemoveSegment}
+                styles={styles}
+                theme={theme}
+            />
         </div>
     );
 }
+
